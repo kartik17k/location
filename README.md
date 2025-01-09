@@ -80,7 +80,7 @@ This Flutter application collects user information through a form and retrieves 
 
 ## Screenshots
 - **Form View**:
-  ![Form](![Screenshot 2025-01-09 235407](https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c))
+  ![Form] ![Screenshot 2025-01-09 235407](https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c)
 - **Location Display**:
   ![Location](<screenshot-url>)
 
