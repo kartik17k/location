@@ -256,15 +256,20 @@ class _HomeState extends State<Home> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                            backgroundColor: backgroundColor, // Set the dialog background color
                             title: Row(
                               children: [
                                 const Icon(Icons.check_circle, color: Colors.green),
                                 const SizedBox(width: 8),
-                                const Text('Form Submitted'),
+                                Text(
+                                  'Form Submitted',
+                                  style: const TextStyle(color: onSurfaceColor), // Text color
+                                ),
                               ],
                             ),
                             content: Text(
                               'Name: ${nameController.text}\nEmail: ${emailController.text}\nPhone: ${phoneController.text}',
+                              style: const TextStyle(color: onSurfaceColor), // Text color
                             ),
                             actions: [
                               TextButton(
@@ -272,7 +277,10 @@ class _HomeState extends State<Home> {
                                   Navigator.pop(context);
                                   _submitForm();
                                 },
-                                child: const Text('OK'),
+                                child: const Text(
+                                  'OK',
+                                  style: TextStyle(color: primaryColor), // Button text color
+                                ),
                               ),
                             ],
                           ),
