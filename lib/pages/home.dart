@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:location/service/localNotification.dart';
+
+import '../service/firestore.dart';
+import '../theme/color.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -76,55 +80,241 @@ class _HomeState extends State<Home> {
       debugPrint(e.toString());
     }
   }
-
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      String name = nameController.text;
+      String address = _currentAddress ?? 'Unknown address';
+
+      saveDataWithLocation(
+        nameController.text,
+        emailController.text,
+        phoneController.text,
+      );
+
+      LocalNotifications.Notification(
+        title: "Hello $name,",
+        body: "How was the $address?",
+      );
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Form submitted successfully!')),
       );
+
+      // Clear the form and reset state
+      _formKey.currentState?.reset();
+      nameController.clear();
+      emailController.clear();
+      phoneController.clear();
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('User Information')),
-      body: Padding(
+      appBar: AppBar(
+        title: const Text('Location',style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 30
+        ),),
+        backgroundColor: primaryColor,
+        foregroundColor: onPrimaryColor,
+        elevation: 0,
+      ),
+      backgroundColor: backgroundColor,
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Text(
+                "Fill in your details",
+
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: onBackgroundColor,
+                ),
+              ),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Please enter your name'
-                    : null,
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  hintText: 'Enter your name',
+                  prefixIcon: const Icon(Icons.person, color: primaryColor),
+                  filled: true,
+                  fillColor: surfaceColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                style: const TextStyle(color: onSurfaceColor),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your name';
+                  }
+                  return null;
+                },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-                validator: (value) => value == null || !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)
-                    ? 'Enter a valid email'
-                    : null,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                  prefixIcon: const Icon(Icons.email, color: primaryColor),
+                  filled: true,
+                  fillColor: surfaceColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                style: const TextStyle(color: onSurfaceColor),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  return null;
+                },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                  hintText: 'Enter your phone number',
+                  prefixIcon: const Icon(Icons.phone, color: primaryColor),
+                  filled: true,
+                  fillColor: surfaceColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                style: const TextStyle(color: onSurfaceColor),
                 keyboardType: TextInputType.phone,
-                validator: (value) => value == null || !RegExp(r'^\d{10}\$').hasMatch(value)
-                    ? 'Enter a valid 10-digit phone number'
-                    : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your phone number';
+                  }
+                  if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                    return 'Please enter a valid 10-digit phone number';
+                  }
+                  return null;
+                },
               ),
-              if (_currentAddress != null) ...[
-                SizedBox(height: 16),
-                Text('Address: $_currentAddress'),
+              const SizedBox(height: 16),
+              if (_currentPosition != null) ...[
+                Text(
+                  "Latitude: ${_currentPosition!.latitude.toStringAsFixed(6)}",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: onSurfaceColor,
+                  ),
+                ),
+                Text(
+                  "Longitude: ${_currentPosition!.longitude.toStringAsFixed(6)}",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: onSurfaceColor,
+                  ),
+                ),
+                const SizedBox(height: 8),
               ],
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: Text('Submit'),
+              if (_currentAddress != null) ...[
+                Text(
+                  "Address:",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: onBackgroundColor,
+                  ),
+                ),
+                Text(
+                  _currentAddress!,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: onSurfaceColor,
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Row(
+                              children: [
+                                const Icon(Icons.check_circle, color: Colors.green),
+                                const SizedBox(width: 8),
+                                const Text('Form Submitted'),
+                              ],
+                            ),
+                            content: Text(
+                              'Name: ${nameController.text}\nEmail: ${emailController.text}\nPhone: ${phoneController.text}',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  _submitForm();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: onPrimaryColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    icon: const Icon(Icons.send),
+                    label: const Text(
+                      'Submit',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      _formKey.currentState?.reset();
+                      nameController.clear();
+                      emailController.clear();
+                      phoneController.clear();
+                    },
+                    icon: const Icon(Icons.refresh, color: primaryColor),
+                    label: const Text(
+                      'Reset Form',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

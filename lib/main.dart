@@ -2,9 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:location/firebase_options.dart';
 import 'package:location/pages/home.dart';
-
+import 'package:location/service/localNotification.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifications.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
