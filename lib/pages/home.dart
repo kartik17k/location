@@ -239,23 +239,6 @@ class _HomeState extends State<Home> {
                 },
               ),
               const SizedBox(height: 16),
-              if (_currentPosition != null) ...[
-                Text(
-                  "Latitude: ${_currentPosition!.latitude.toStringAsFixed(6)}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: onSurfaceColor,
-                  ),
-                ),
-                Text(
-                  "Longitude: ${_currentPosition!.longitude.toStringAsFixed(6)}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: onSurfaceColor,
-                  ),
-                ),
-                const SizedBox(height: 8),
-              ],
               if (_currentAddress != null) ...[
                 const Text(
                   "Address:",
