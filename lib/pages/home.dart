@@ -74,12 +74,13 @@ class _HomeState extends State<Home> {
       Placemark place = placemarks[0];
       setState(() {
         _currentAddress =
-        "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.postalCode}";
+            "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.postalCode}";
       });
     } catch (e) {
       debugPrint(e.toString());
     }
   }
+
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       String name = nameController.text;
@@ -108,16 +109,15 @@ class _HomeState extends State<Home> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Location',style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 30
-        ),),
+        title: const Text(
+          'Location',
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+        ),
         backgroundColor: primaryColor,
         foregroundColor: onPrimaryColor,
         elevation: 0,
@@ -132,7 +132,6 @@ class _HomeState extends State<Home> {
             children: [
               const Text(
                 "Fill in your details",
-
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -256,20 +255,24 @@ class _HomeState extends State<Home> {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            backgroundColor: backgroundColor, // Set the dialog background color
+                            backgroundColor:
+                                backgroundColor, // Set the dialog background color
                             title: Row(
                               children: [
-                                const Icon(Icons.check_circle, color: Colors.green),
+                                const Icon(Icons.check_circle,
+                                    color: Colors.green),
                                 const SizedBox(width: 8),
                                 Text(
                                   'Form Submitted',
-                                  style: const TextStyle(color: onSurfaceColor), // Text color
+                                  style: const TextStyle(
+                                      color: onSurfaceColor), // Text color
                                 ),
                               ],
                             ),
                             content: Text(
                               'Name: ${nameController.text}\nEmail: ${emailController.text}\nPhone: ${phoneController.text}',
-                              style: const TextStyle(color: onSurfaceColor), // Text color
+                              style: const TextStyle(
+                                  color: onSurfaceColor), // Text color
                             ),
                             actions: [
                               TextButton(
@@ -279,7 +282,8 @@ class _HomeState extends State<Home> {
                                 },
                                 child: const Text(
                                   'OK',
-                                  style: TextStyle(color: primaryColor), // Button text color
+                                  style: TextStyle(
+                                      color: primaryColor), // Button text color
                                 ),
                               ),
                             ],
@@ -301,9 +305,9 @@ class _HomeState extends State<Home> {
                     icon: const Icon(Icons.send),
                     label: const Text(
                       'Submit',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-
                   ),
                   TextButton.icon(
                     onPressed: () {

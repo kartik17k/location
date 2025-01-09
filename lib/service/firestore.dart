@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
-
-
 Future<Map<String, dynamic>> getLocation() async {
   LocationPermission permission = await Geolocator.requestPermission();
-  if (permission == LocationPermission.denied) throw Exception("Location permission denied");
+  if (permission == LocationPermission.denied)
+    throw Exception("Location permission denied");
 
   Position position = await Geolocator.getCurrentPosition();
-  List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+  List<Placemark> placemarks =
+      await placemarkFromCoordinates(position.latitude, position.longitude);
 
   return {
     'latitude': position.latitude,
@@ -18,8 +18,8 @@ Future<Map<String, dynamic>> getLocation() async {
   };
 }
 
-
-Future<void> storeUserData(String name, String email, String phone, DateTime timestamp) async {
+Future<void> storeUserData(
+    String name, String email, String phone, DateTime timestamp) async {
   await FirebaseFirestore.instance.collection('users').add({
     'name': name,
     'email': email,
@@ -27,7 +27,6 @@ Future<void> storeUserData(String name, String email, String phone, DateTime tim
     'timestamp': timestamp,
   });
 }
-
 
 void saveDataWithLocation(String name, String email, String phone) async {
   final locationData = await getLocation();
