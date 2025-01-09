@@ -79,10 +79,10 @@ This Flutter application collects user information through a form and retrieves 
 - `flutter_local_notifications`: Local notification support.
 
 ## Screenshots
-- **Form View**:
-  ![Form] ![Screenshot 2025-01-09 235407](https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c)
-- **Location Display**:
-  ![Location](<screenshot-url>)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c" alt="Screenshot 1" width="45%" />
+  <img src="https://github.com/user-attachments/assets/a12015dd-dbd7-4651-bf2c-5e974e742aad" alt="Screenshot 2" width="45%" />
+</p>
 
 ## Known Issues
 - Ensure location services are enabled on the device.
