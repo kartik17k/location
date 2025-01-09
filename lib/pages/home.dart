@@ -29,7 +29,14 @@ class _HomeState extends State<Home> {
   Future<bool> _handleLocationPermission() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enable location services.')),
+        const SnackBar(
+          content: Text(
+            'Please enable location services.',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
       );
       return false;
     }
@@ -39,14 +46,28 @@ class _HomeState extends State<Home> {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permission denied.')),
+          const SnackBar(
+            content:  Text(
+              'Location permission denied.',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
         );
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Location permission permanently denied.')),
+        SnackBar(
+          content: const Text(
+            'Location permission permanently denied.',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green[700],
+          behavior: SnackBarBehavior.floating,
+        ),
       );
       return false;
     }
@@ -98,7 +119,14 @@ class _HomeState extends State<Home> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Form submitted successfully!')),
+        SnackBar(
+          content: const Text(
+            'Form submitted successfully!',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green[700],
+          behavior: SnackBarBehavior.floating,
+        ),
       );
 
       // Clear the form and reset state
@@ -229,7 +257,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 8),
               ],
               if (_currentAddress != null) ...[
-                Text(
+                const Text(
                   "Address:",
                   style: const TextStyle(
                     fontSize: 16,
@@ -257,14 +285,14 @@ class _HomeState extends State<Home> {
                           builder: (context) => AlertDialog(
                             backgroundColor:
                                 backgroundColor, // Set the dialog background color
-                            title: Row(
+                            title: const Row(
                               children: [
-                                const Icon(Icons.check_circle,
+                                Icon(Icons.check_circle,
                                     color: Colors.green),
-                                const SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 Text(
                                   'Form Submitted',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: onSurfaceColor), // Text color
                                 ),
                               ],
