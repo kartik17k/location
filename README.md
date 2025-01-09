@@ -80,9 +80,9 @@ This Flutter application collects user information through a form and retrieves 
 
 ## Screenshots
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c" alt="Screenshot 1" width="30%" style="margin-right: 10px;" />
-  <img src="https://github.com/user-attachments/assets/a12015dd-dbd7-4651-bf2c-5e974e742aad" alt="Screenshot 2" width="30%" style="margin-right: 10px;" />
-  <img src="https://github.com/user-attachments/assets/9d0a2189-289d-4678-88a0-ab229c75d92a" alt="Screenshot 3" width="30%" />
+  <img src="https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c" alt="Screenshot 1" width="25%" style="margin-right: 10px;" />
+  <img src="https://github.com/user-attachments/assets/a12015dd-dbd7-4651-bf2c-5e974e742aad" alt="Screenshot 2" width="25%" style="margin-right: 10px;" />
+  <img src="https://github.com/user-attachments/assets/9d0a2189-289d-4678-88a0-ab229c75d92a" alt="Screenshot 3" width="25%" />
 </p>
 
 ## Known Issues
