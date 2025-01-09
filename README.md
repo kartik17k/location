@@ -80,7 +80,7 @@ This Flutter application collects user information through a form and retrieves 
 
 ## Screenshots
 - **Form View**:
-  ![Form](<screenshot-url>)
+  ![Form](![Screenshot 2025-01-09 235407](https://github.com/user-attachments/assets/bf188d2a-fc72-4ec1-891c-19b56b1fbd9c))
 - **Location Display**:
   ![Location](<screenshot-url>)
 
@@ -91,7 +91,7 @@ This Flutter application collects user information through a form and retrieves 
 ## Future Enhancements
 - Add persistent storage for user data.
 - Allow users to edit submitted information.
-- Implement dark mode support.
+- Implement light mode support.
 
 ## License
 This project is licensed under the MIT License.
