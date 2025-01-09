@@ -44,7 +44,7 @@ This Flutter application collects user information through a form and retrieves 
     - `localNotification.dart`: Configures and sends local notifications.
   - `theme/`
     - `color.dart`: Contains theme-related color definitions.
-  - `screens/`
+  - `pages/`
     - `home.dart`: The main screen for the user form and location retrieval.
 
 ## How It Works
