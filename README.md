@@ -18,12 +18,12 @@ This Flutter application collects user information through a form and retrieves 
 
 1. **Clone the Repository**:
     ```bash
-    git clone <repository-url>
+    git clone <https://github.com/kartik17k/location>
     ```
 
 2. **Navigate to the Project Directory**:
     ```bash
-    cd <project-directory>
+    cd <Location>
     ```
 
 3. **Install Dependencies**:
