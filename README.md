@@ -94,5 +94,7 @@ This Flutter application collects user information through a form and retrieves 
 - Allow users to edit submitted information.
 - Implement light mode support.
 
-## License
-This project is licensed under the MIT License.
+### Contact
+For questions or suggestions, feel free to reach out at:
+- Email: kartikkattishettar@gmail.com
+- GitHub: [Kartik](https://github.com/kartik17k)
